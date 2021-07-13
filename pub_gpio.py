@@ -13,13 +13,13 @@ if __name__ == '__main__':
     pub = rospy.Publisher('button_state', Bool, queue_size = 10)
 
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+    GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
     rate = rospy.Rate(10)
 
     while not rospy.is_shutdown():
-        rospy.loginfo("loop")
         gpio_state = not GPIO.input(BUTTON_GPIO)
+        print(gpio_state)
         pub.publish(gpio_state)
         rate.sleep()
 
